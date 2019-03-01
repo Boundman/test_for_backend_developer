@@ -1,0 +1,82 @@
+/* Для начальной странцы со списком изображений */
+
+#add-image-container{
+    width: 100%;
+    float: left;
+}
+
+#add-image{
+    float: right;
+    margin-right: 35%;
+    padding: 2%;
+    background-color: #b0aceb;
+    border-radius: 100%;
+    cursor: pointer;
+    font-size: x-large;
+}
+
+#add-image:hover{
+    background-color: #8c8beb;
+}
+
+#images-list{
+    float: left;
+    width: 100%;
+}
+
+.image-object{
+    margin-top: 3%;
+}
+
+/* Для страницы аплоада изображения */
+
+#upload-image-form{
+    margin-left: 25%;
+}
+
+/* Для страницы ресайза изображения */
+
+#resize-image-container{
+    width: 100%;
+    float: left;
+}
+
+.resize-parameter{
+    width: 100%;
+    float: left;
+    padding: 0.7%;
+}
+
+.label-container{
+    float: left;
+    width: 35%;
+}
+
+.label-container label{
+    float: right;
+}
+
+.resize-parameter input{
+    float: left;
+    margin-left: 3%;
+}
+
+/* Для кнопок */
+
+#resize-image-btn, #upload-image-btn{
+    margin-left: 60%;
+    margin-bottom: 2.5%;
+    padding: 0.5%;
+    background-color: #b0aceb
+}
+
+#resize-image-btn:hover, #upload-image-btn:hover{
+    background-color: #8c8beb;
+}
+
+/* Для ошибок */
+
+.errors-block{
+    margin-left: 55%;
+    color: #ac0f02
+}

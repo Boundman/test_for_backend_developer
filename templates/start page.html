@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}List of Images{% endblock %}
+{% load staticfiles %}
+{% block body %}
+
+    <div id="add-image-container">
+        <div id="add-image">+</div>
+    </div>
+
+    <div id="images-list">
+        {% for image in images %}
+            <div class="image-object">
+                <a href="{% url 'resize image' image.id image.width image.height image.size %}">
+                    <img src="/{{ image.picture }}">
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <script>
+
+        $('#add-image').click(function () {
+            csrf_token = "{{ csrf_token }}";
+            $.ajax({
+                url: '{% url "start page" %}',
+                type: "POST",
+                headers: {'X-CSRFToken': csrf_token},
+                data: {data: 'to upload page'},
+                success: function () {
+                    window.location.replace('{% url "upload image" %}')
+                },
+                error: function (response) {
+                    console.log("ERROR");
+                    console.log(response);
+                }
+
+            });
+        });
+
+    </script>
+
+{% endblock %}

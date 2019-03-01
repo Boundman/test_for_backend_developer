@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Upload Image{% endblock %}
+{% block body %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div id="upload-image-form">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" name="upload-image-btn" id="upload-image-btn">Загрузить</button>
+    </form>
+    {% if errors %}
+        <div class="errors-block">{{ errors }}</div>
+    {% endif %}
+
+{% endblock %}

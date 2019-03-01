@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Resize Image{% endblock %}
+{% block body %}
+    <img src="/{{ image.picture }}">
+    <div id="resize-image-container">
+        <form method="post">
+            {% csrf_token %}
+            <div class="resize-parameter">
+                <div class="label-container">
+                    <label>Ширина (в пикселях):</label>
+                </div>
+                <input id="width" name="width" title="Ширина" value="{{ image.width }}">
+            </div>
+
+            <div class="resize-parameter">
+                <div class="label-container">
+                    <label>Высота (в пикселях):</label>
+                </div>
+                <input id="height" name="height" title="Высота" value="{{ image.height }}">
+            </div>
+
+            <div class="resize-parameter">
+                <div class="label-container">
+                    <label>Размер (в байтах):</label>
+                </div>
+                <input id="size" name="size" title="Размер" value="{{ image.size }}">
+            </div>
+            <button type="submit" name="resize-image-btn" id="resize-image-btn">Применить</button>
+        </form>
+    </div>
+
+    <div id="for_message"></div>
+    {% if errors %}
+        <div class="errors-block">{{ errors }}</div>
+    {% endif %}
+
+{% endblock %}
