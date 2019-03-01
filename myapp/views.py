@@ -39,7 +39,9 @@ class UploadImage(View):
                     img_from_device = form_data['device_image']
 
                     if img_url and img_from_device:  # Загрузили изображение двумя способами
-                        return render(request, 'upload image.html', {'errors': 'Вы должны загрузить изображение ОДНИМ из представленных способов', 'form': form})
+                        return render(request, 'upload image.html',
+                                      {'errors': 'Вы должны загрузить изображение ОДНИМ из представленных способов',
+                                       'form': form})
                     elif img_url:  # Загрузиил через url
                         img = ImageModel()
                         name = img_url.split('/')[-1]
@@ -63,7 +65,8 @@ class UploadImage(View):
                         image.save()
                         return HttpResponseRedirect('/')
                     elif not img_url and not img_from_device:  # Изображение не загружено ни одним из способов
-                        return render(request, 'upload image.html', {'errors': 'Вы должны загрузить изображение', 'form': form})
+                        return render(request, 'upload image.html',
+                                      {'errors': 'Вы должны загрузить изображение', 'form': form})
 
 
 class ResizeImage(View):
@@ -81,7 +84,9 @@ class ResizeImage(View):
                     height = int(request.POST.get('height'))
                     size = int(request.POST.get('size'))
                 except ValueError:  # Если ввели не числовые значения полей
-                    return render(request, 'resize image.html', {'image': image, 'errors': 'Для размеров рекомендуется использовать числовые значения'})
+                    return render(request, 'resize image.html', {'image': image,
+                                                                 'errors': 'Для размеров рекомендуется использовать '
+                                                                           'числовые значения'})
 
                 if width == image.width and height == image.height and size == image.size:  # Ничего не меняли
                     return HttpResponseRedirect('/')
@@ -94,7 +99,8 @@ class ResizeImage(View):
                 resized_image.save(path_to_resized)  # Сохранили копию
                 size_resized = os.stat(path_to_resized).st_size  # Нашли её размер
 
-                if size_resized <= size:  # Если указанные размеры корректны и размер ресайзнутого изображения меньше указанного
+                # Если указанные размеры корректны и размер ресайзнутого изображения меньше указанного
+                if size_resized <= size:
                     resized_image.save(str(image.picture))  # Сохраняем рейзнутое поверх оригинала
                     os.remove(path_to_resized)  # Копию, которая нужна была для проверки удаляем
 
@@ -107,4 +113,5 @@ class ResizeImage(View):
                 else:  # Если размер больше указанного
                     os.remove(path_to_resized)  # Копию, которая нужна была для проверки удаляем
                     # Выводим сообщение об ошибке
-                    return render(request, 'resize image.html', {'image': image, 'errors': 'Размер изображения больше допустимого указанного'})
+                    return render(request, 'resize image.html',
+                                  {'image': image, 'errors': 'Размер изображения больше допустимого указанного'})
